@@ -21,3 +21,13 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Локальные файлы IDE и сборки — в репозиторий не коммитим (см. чек-лист)
+.idea/
+*.iml
+target/
+# Отчёт Jacoco добавляется принудительно: git add -f target/site/jacoco
+
+# Служебные файлы локального запуска
+run_tests.bat
+done.txt

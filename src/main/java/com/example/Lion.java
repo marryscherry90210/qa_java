@@ -6,7 +6,15 @@ public class Lion {
 
     boolean hasMane;
 
-    public Lion(String sex) throws Exception {
+    // БЫЛО в заготовке: Feline feline = new Feline();
+    // Lion сам создавал объект Feline — это жёсткая зависимость, мок туда не подставить.
+    // СТАЛО: Feline приходит снаружи через конструктор (инъекция зависимости).
+    private final Feline feline;
+
+    public Lion(String sex, Feline feline) throws Exception {
+        this.feline = feline;
+        // Три ветки условия → в тестах нужны: "Самец", "Самка" (параметризованный тест)
+        // и некорректное значение (отдельный тест на исключение)
         if ("Самец".equals(sex)) {
             hasMane = true;
         } else if ("Самка".equals(sex)) {
@@ -15,8 +23,6 @@ public class Lion {
             throw new Exception("Используйте допустимые значения пола животного - самей или самка");
         }
     }
-
-    Feline feline = new Feline();
 
     public int getKittens() {
         return feline.getKittens();

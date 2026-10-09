@@ -2,6 +2,8 @@ package com.example;
 
 import java.util.List;
 
+// Класс из заготовки — не меняем. Тестировать его по заданию не обязательно,
+// но Feline его наследует, поэтому часть методов вызывается через Feline.
 public class Animal {
 
     public List<String> getFood(String animalKind) throws Exception {
