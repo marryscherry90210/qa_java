@@ -6,7 +6,7 @@ QA Java Project — финальный проект 6 спринта.
 ## Стек
 - Java 11
 - JUnit 4.13.2 (в том числе раннер `Parameterized`)
-- Mockito 5.11.0 (`@Mock`, `@Spy`, `when`, `verify`)
+- Mockito 5.11.0 (`@Mock`, `when`, `verify`)  моки только для зависимостей
 - Jacoco 0.8.12 (отчёт о покрытии)
 
 ## Запуск
@@ -22,9 +22,9 @@ mvn clean test
 ## Карта покрытия
 | Класс | Метод / ветка | Тест |
 |---|---|---|
-| Feline | `eatMeat()` | `FelineTest.eatMeatReturnsPredatorFood`, `eatMeatCallsGetFoodWithPredator` |
+| Feline | `eatMeat()` | `FelineTest.eatMeatReturnsPredatorFood` |
 | Feline | `getFamily()` | `FelineTest.getFamilyReturnsFeline` |
-| Feline | `getKittens()` | `FelineTest.getKittensWithoutArgsReturnsOne`, `getKittensWithoutArgsCallsGetKittensWithOne` |
+| Feline | `getKittens()` | `FelineTest.getKittensWithoutArgsReturnsOne` |
 | Feline | `getKittens(int)` | `FelineParameterizedTest` (0, 1, 5) |
 | Cat | `getSound()` | `CatTest.getSoundReturnsMeow` |
 | Cat | `getFood()` | `CatTest.getFoodReturnsPredatorFood`, `getFoodCallsEatMeat` |
@@ -34,8 +34,8 @@ mvn clean test
 | Lion | `doesHaveMane()` | `LionParameterizedTest` |
 | Alex | все методы | `AlexTest` |
 
-## Результат прогона (09.10.2026)
-`mvn clean test` (Maven 3.9.16, JDK 16, `release 11`) → **BUILD SUCCESS**, 20 тестов, 0 падений.
+## Результат прогона (10.10.2026, после ревью)
+`mvn clean test` (`release 11`) → **BUILD SUCCESS**, 18 тестов, 0 падений.
 
 | Класс | Инструкции | Ветки | Строки | Методы |
 |---|---|---|---|---|
