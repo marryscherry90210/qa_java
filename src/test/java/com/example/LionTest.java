@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -18,10 +19,17 @@ public class LionTest {
     @Mock
     Feline feline;
 
+    private Lion lion;
+
+    // Общая инициализация для тестов методов льва
+    @Before
+    public void setUp() throws Exception {
+        lion = new Lion("Самец", feline);
+    }
+
     @Test
-    public void getKittensReturnsFelineKittens() throws Exception {
+    public void getKittensReturnsFelineKittens() {
         Mockito.when(feline.getKittens()).thenReturn(1);
-        Lion lion = new Lion("Самец", feline);
         assertEquals(1, lion.getKittens());
     }
 
@@ -29,13 +37,12 @@ public class LionTest {
     public void getFoodReturnsPredatorFood() throws Exception {
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
         Mockito.when(feline.getFood("Хищник")).thenReturn(expected);
-        Lion lion = new Lion("Самец", feline);
         assertEquals(expected, lion.getFood());
     }
 
+    // Третья ветка конструктора — недопустимый пол. Здесь объект создаётся отдельно,
+    // потому что проверяется сам конструктор. Ветки "Самец"/"Самка" — в LionParameterizedTest.
     // Текст сообщения взят из заготовки как есть (включая опечатку «самей»).
-    // Третья ветка конструктора — недопустимый пол. Ветки "Самец"/"Самка"
-    // проверяются в LionParameterizedTest.
     @Test
     public void constructorWithInvalidSexThrowsException() {
         Exception exception = assertThrows(Exception.class, () -> new Lion("Оно", feline));
