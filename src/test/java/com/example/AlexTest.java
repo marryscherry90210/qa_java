@@ -1,5 +1,6 @@
 package com.example;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -14,31 +15,37 @@ import static org.junit.Assert.assertTrue;
 @RunWith(MockitoJUnitRunner.class)
 public class AlexTest {
 
+    // Мок зависимости: Feline передаётся в Alex через конструктор
     @Mock
     Feline feline;
 
+    private Alex alex;
+
+    // Общая инициализация для всех тестов. MockitoJUnitRunner создаёт моки
+    // до вызова методов с @Before, поэтому feline здесь уже готов
+    @Before
+    public void setUp() throws Exception {
+        alex = new Alex(feline);
+    }
+
     @Test
-    public void getFriendsReturnsMadagascarFriends() throws Exception {
-        Alex alex = new Alex(feline);
+    public void getFriendsReturnsMadagascarFriends() {
         assertEquals(List.of("Марти", "Глория", "Мелман"), alex.getFriends());
     }
 
     @Test
-    public void getPlaceOfLivingReturnsNewYorkZoo() throws Exception {
-        Alex alex = new Alex(feline);
+    public void getPlaceOfLivingReturnsNewYorkZoo() {
         assertEquals("Нью-Йоркский зоопарк", alex.getPlaceOfLiving());
     }
 
     @Test
-    public void getKittensReturnsZero() throws Exception {
-        Alex alex = new Alex(feline);
+    public void getKittensReturnsZero() {
         assertEquals(0, alex.getKittens());
     }
 
     // Конструктор всегда передаёт "Самец" → у Алекса должна быть грива
     @Test
-    public void alexHasMane() throws Exception {
-        Alex alex = new Alex(feline);
+    public void alexHasMane() {
         assertTrue(alex.doesHaveMane());
     }
 }
